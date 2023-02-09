@@ -1,6 +1,6 @@
 import { css, keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import FONT from '../constants/fonts';
 import COLOR from '../constants/theme';
 import { Down, Up } from './icons/BtnIcons';
@@ -11,12 +11,11 @@ import { Content } from '../interfaces/main';
 const customAnimation = keyframes`
 0% {
   opacity: 0;
-}
-50% {
-  opacity: 1;
+        transform: translateY(-1.25em);
 }
 100% {
   opacity: 1;
+        transform: translateY(0);
 }
 `;
 export default function Accordion(props: Content) {
@@ -52,6 +51,7 @@ export default function Accordion(props: Content) {
     </>
   );
 }
+
 const Text = styled.div`
   padding-left: 10px;
   color: ${COLOR.TYPEFACE_BLACK};
@@ -67,6 +67,8 @@ const ImgWrapper = styled.div`
   display: flex;
   flex-direction: column;
   //justify-content: center;
+  transition: 0.3s ease;
+  /* transition: 0.3s ease-in-out; */
 `;
 const Img = styled.div<{ img: string }>`
   width: 157px;
@@ -79,6 +81,7 @@ const Img = styled.div<{ img: string }>`
 
 const Wrapper = styled.div<{ isOpen: boolean }>`
   width: 100%;
+  transition: 0.3s ease;
   margin-top: 16px;
   margin-bottom: 16px;
   display: flex;
@@ -88,7 +91,7 @@ const Wrapper = styled.div<{ isOpen: boolean }>`
   ${(props) =>
     props.isOpen &&
     css`
-      animation: ${customAnimation} 3s linear alternate;
+      animation: ${customAnimation} 0.1s linear alternate;
     `}
 `;
 const Header = styled.button`

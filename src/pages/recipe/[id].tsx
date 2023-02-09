@@ -152,15 +152,16 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
             <Title css={FONT.SUBTITLE_1}>레시피 더 자세히 보기</Title>
             <Sequences>
               {curRecipe?.recipe_sequence?.map((sequence: sequence) => (
-                <SequenceWrapper
-                  key={sequence?.order}
-                  ref={refArr[sequence?.order - 1]}
-                  onClick={() => topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })}>
-                  <Sequence>
+                <SequenceWrapper key={sequence?.order} ref={refArr[sequence?.order - 1]}>
+                  <Sequence onClick={() => topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })}>
                     <NumberIcon num={sequence?.order} />
                     <Description css={FONT.BODY_1}>{sequence?.short_desc}</Description>
                   </Sequence>
                   <Img src={sequence?.image} />
+                  <TimeIcon css={FONT.BODY_2_2}>
+                    <ClockIcon />
+                    {sequence?.time}
+                  </TimeIcon>
                   <Text css={FONT.BODY_1}>{sequence?.long_desc}</Text>
                 </SequenceWrapper>
               ))}
@@ -185,9 +186,8 @@ const Container = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 20px;
 
-  background: ${COLOR.BG_GRAY1_85};
+  background: ${COLOR.PRIMARY_WHITE};
 
   overflow: auto;
 `;
@@ -201,7 +201,7 @@ const TopBar = styled.div`
   height: auto;
   max-width: 450px;
 
-  padding: 0 1.5rem 20px;
+  padding: 0 1.5rem 1rem;
 
   display: flex;
   flex-direction: column;
@@ -228,11 +228,12 @@ const IconWrapper = styled.div`
 
 const Title = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
 `;
 
 const Subtitle = styled.div`
-  padding-bottom: 1rem;
+  padding: 1rem 0;
   color: ${COLOR.TYPEFACE_GRAY1};
 `;
 
@@ -307,7 +308,7 @@ const Content = styled.div`
 `;
 
 const TagIcon = styled.div`
-  padding: 0.5rem 0.8rem 0.4rem 0.8rem;
+  padding: 5px 10px 4px;
 
   color: ${COLOR.TYPEFACE_WHITE};
   background: ${COLOR.PRIMARY_ORANGE};
@@ -375,6 +376,21 @@ const Img = styled.img`
   border-radius: 12px;
 
   object-fit: cover;
+`;
+
+const TimeIcon = styled.div`
+  width: max-content;
+  padding: 0.35rem 0.5rem 0.25rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 0.5rem;
+
+  border-radius: 0.5rem;
+
+  color: ${COLOR.PRIMARY_ORANGE};
+  background: ${COLOR.PRIMARY_ORANGE2};
 `;
 
 const Ingredients = styled.div`

@@ -1,16 +1,16 @@
 import styled from '@emotion/styled';
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { RoundSave, ShowMore, GoForward } from '../../components/icons/BtnIcons';
-import GoBack from '../../components/common/navigations/goBack';
-import PATH from '../../constants/path';
-import COLOR from '../../constants/theme';
-import FONT from '../../constants/fonts';
-import { accessApi } from '../../api/api';
+import { RoundSave, ShowMore, GoForward } from '../../../components/icons/BtnIcons';
+import GoBack from '../../../components/common/navigations/goBack';
+import PATH from '../../../constants/path';
+import COLOR from '../../../constants/theme';
+import FONT from '../../../constants/fonts';
+import { accessApi } from '../../../api/api';
 import { useQuery } from 'react-query';
 import { GetServerSideProps } from 'next';
 
-import { recipeAPI } from '../../api/recipeAPI';
+import { recipeAPI } from '../../../api/recipeAPI';
 
 export default function VideoPlayer() {
   const [hasWindow, setHasWindow] = useState(false);
@@ -18,7 +18,9 @@ export default function VideoPlayer() {
   const [isSelect, setSelect] = useState(false);
   const router = useRouter();
   const [user, setUser] = useState({ nickname: null, saved_recipes: [], saved_themes: [] });
-  const { themeId } = router.query;
+  //const { themeId } = router.query;
+  const testId = router.query.themeid;
+  console.log(testId);
 
   const Themes = [
     { id: 1, name: '계란으로 5일 버티기' },
@@ -26,7 +28,7 @@ export default function VideoPlayer() {
     { id: 3, name: '감자로 3일 버티기' },
   ];
 
-  const { data } = useQuery(['Recipes', themeId], () => recipeAPI.getRecipe(Number(router.query.id)));
+  const { data } = useQuery(['Recipes', testId], () => recipeAPI.getRecipe(Number(router.query.id)));
 
   const recipeTitle = data && data.title;
 
@@ -57,7 +59,7 @@ export default function VideoPlayer() {
 
     setSelect((prev) => !prev);
   };
-  const realThemeId = Themes.filter((a) => `${a.id}` === themeId);
+  const realThemeId = Themes?.filter((a) => `${a.id}` === testId);
   const realTheme = realThemeId[0]?.name;
 
   return (
@@ -68,7 +70,7 @@ export default function VideoPlayer() {
         <ThemeBtn
           css={FONT.BODY_2_3}
           onClick={() => {
-            router.push(`/theme/${themeId}`);
+            router.push(`/theme/${testId}`);
           }}>
           {realTheme}
           <GoForward />

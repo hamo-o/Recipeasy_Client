@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 
 import COLOR from '../../constants/theme';
-import { MainLogo, KakaoLogo } from '../../components/icons/LogoIcons';
+import { MainLogo, SubLogo, KakaoLogo } from '../../components/icons/LogoIcons';
 
 const Login = () => {
   const router = useRouter();
@@ -19,7 +19,7 @@ const Login = () => {
   return (
     <Container>
       <Title>
-        <SubTitle>방구석 셰프를 위한 1분 레시피</SubTitle>
+        <SubLogo />
         <MainLogo color={COLOR.PRIMARY_ORANGE} />
       </Title>
       <Btn onClick={handleClickLogin}>
@@ -44,22 +44,14 @@ const Container = styled.div`
 `;
 
 const Title = styled.div`
-  padding-bottom: 22rem;
+  position: absolute;
+  top: 30vh;
 
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-`;
-
-const SubTitle = styled.div`
-  font-family: 'IBM Plex Sans KR';
-  font-weight: bold;
-  line-height: 145%;
-
-  text-align: center;
-  letter-spacing: -0.4px;
-
-  color: ${COLOR.PRIMARY_ORANGE};
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 `;
 
 const Btn = styled.div`

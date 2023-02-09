@@ -3,16 +3,12 @@ import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import PATH from '../../../constants/path';
 import COLOR from '../../../constants/theme';
+import { Container } from '../../../interfaces/main';
 
 const menuData = [
   { id: 'menu01', name: '전체보기', path: PATH.HOME },
   { id: 'menu02', name: '테마별보기', path: '/home/showTheme' },
 ];
-
-interface Container {
-  pathName: string;
-  href: string;
-}
 
 export default function Top_navigation() {
   // eslint-disable-next-line react-hooks/rules-of-hooks

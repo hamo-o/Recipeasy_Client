@@ -1,4 +1,4 @@
-import { ChangeEventHandler } from 'react';
+import { ChangeEventHandler, MouseEventHandler } from 'react';
 
 export interface Content {
   full: string;
@@ -63,6 +63,7 @@ export interface sequence {
   long_desc: string;
   order: number;
   short_desc: string;
+  time: string;
 }
 
 export interface Measure {
@@ -73,4 +74,15 @@ export interface Measure {
   full_image: string;
   half: string;
   half_image: string;
+}
+
+export interface Container {
+  pathName: string;
+  href: string;
+}
+
+export interface propsType {
+  value: string;
+  onChange: ChangeEventHandler<HTMLInputElement> | undefined;
+  reset: MouseEventHandler<HTMLDivElement> | undefined;
 }

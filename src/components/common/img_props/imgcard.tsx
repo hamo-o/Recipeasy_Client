@@ -10,11 +10,13 @@ import { Themes, Recipes } from '../../../interfaces/main';
 import { UseSave } from '../../../hooks/useSave';
 import { useImage } from '../../../hooks/useImage';
 
+import { SkeletonBig, SkeletonMedium, SkeletonSmall } from '../skeletons/card';
+
 export const ImgCardMedium = (props: Themes) => {
   const router = useRouter();
   const loaded = useImage(props.landscape_image);
 
-  return (
+  return loaded ? (
     <Container>
       <MediumContainer
         onClick={() => {
@@ -30,6 +32,8 @@ export const ImgCardMedium = (props: Themes) => {
         </Content>
       </MediumContainer>
     </Container>
+  ) : (
+    <SkeletonMedium />
   );
 };
 
@@ -43,17 +47,17 @@ export const ImgCardSmall = ({ recipe, route }: { recipe: Recipes; route: boolea
       if (ing.length < 3) ing.push(i.name);
     });
 
-  return (
+  return loaded ? (
     <Container>
       <SmallContainer
         onClick={() => {
           const themeId = recipe.theme;
           router.push(
             {
-              pathname: `/videoPlayer/${recipe.id}`,
+              pathname: `/videoPlayer/${recipe.id}/${themeId}`,
               query: { themeId },
             },
-            `/videoPlayer/${recipe.id}`,
+            `/videoPlayer/${recipe.id}/${themeId}`,
           );
         }}
         img={loaded}>
@@ -79,6 +83,8 @@ export const ImgCardSmall = ({ recipe, route }: { recipe: Recipes; route: boolea
         )}
       </Description>
     </Container>
+  ) : (
+    <SkeletonSmall />
   );
 };
 
@@ -86,7 +92,7 @@ export const ImgCardBig = (props: Themes) => {
   const router = useRouter();
   const loaded = useImage(props.portrait_image);
 
-  return (
+  return loaded ? (
     <Container>
       <BigContainer
         imgProps={loaded}
@@ -102,6 +108,8 @@ export const ImgCardBig = (props: Themes) => {
         </Content>
       </BigContainer>
     </Container>
+  ) : (
+    <SkeletonBig />
   );
 };
 

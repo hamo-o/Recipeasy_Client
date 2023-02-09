@@ -7,12 +7,7 @@ import COLOR from '../../../constants/theme';
 import FONT from '../../../constants/fonts';
 
 import { GoBackIcon, DelIcon } from '../../icons/BtnIcons';
-
-interface propsType {
-  value: string;
-  onChange: ChangeEventHandler<HTMLInputElement> | undefined;
-  reset: MouseEventHandler<HTMLDivElement> | undefined;
-}
+import { propsType } from '../../../interfaces/main';
 
 export const InputSearch = (props: { onClick: MouseEventHandler<HTMLInputElement> | undefined }) => {
   return (
